@@ -11,7 +11,19 @@ class Timer extends Component {
   }
 
   //Your code here
+  // The shouldComponentUpdate method fires just before a component    commits to updating. If true is returned from the method, the component will update
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.time === nextState.time) {
+      return  false
+    }
+    return true
+  }
 
+  // This method is called after every component re-render. It does not get called when the component is mounted
+  componentDidUpdate() {
+    this.timer.current.style.backgroundColor =
+    "#" + Math.floor(Math.random() * 16777215).toString(16);
+  }
   componentDidMount() {
     this.interval = setInterval(
       this.clockTick,
